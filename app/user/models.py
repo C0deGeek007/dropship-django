@@ -37,5 +37,5 @@ class UserModel(AbstractUser):
     refId = models.EmailField(unique=True, max_length=254)
     ex = models.TextField(max_length=200, blank=True, null=True)
     USERNAME_FIELD = 'refId'
-    # REQUIRED_FIELDS = ['refId']
+    REQUIRED_FIELDS = []
     objects = CustomUserManager()
