@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'rest_framework',
+    "graphene_django"
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,10 @@ REST_FRAMEWORK = {
     'user.authBackend.ExampleAuthentication'
     ]
 }
+
+AUTHENTICATION_BACKENDS = [
+    'user.authBackend.ExampleAuthentication'
+]
 
 ROOT_URLCONF = 'app.urls'
 

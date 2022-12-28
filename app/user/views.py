@@ -4,6 +4,9 @@ from .userSerializer import UserSerializers, loginSerializer
 from .userServices import UserService
 from .authBackend import ExampleAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.mixins import AccessMixin
+from graphene_django.views import GraphQLView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @api_view(['POST'])
@@ -33,3 +36,6 @@ def users(request):
     print("inside users view")
     print(UserSerializers(request.user).data)
     return Response("inside get all user")
+
+class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
+    pass
