@@ -37,5 +37,8 @@ def users(request):
     print(UserSerializers(request.user).data)
     return Response("inside get all user")
 
-class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
+# class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
+#     pass
+
+class PrivateGraphQLView(GraphQLView):
     pass
