@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # <-- UPDATED line
-        'NAME': 'dropShip-django',  # <-- UPDATED line
+        'NAME': 'dropShip-django-new',  # <-- UPDATED line
         'USER': 'root',  # <-- UPDATED line
         'PASSWORD': 'root123',  # <-- UPDATED line
         'HOST': 'localhost',  # <-- UPDATED line
