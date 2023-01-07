@@ -9,9 +9,6 @@ class Mutation(Mutation, graphene.ObjectType):
     pass
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
-print(schema)
-
-print("djmdfvbjh")
 # schema.execute('''
                
 #                mutation myFirstMutation {

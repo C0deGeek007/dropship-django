@@ -3,17 +3,19 @@ from .userSerializer import UserSerializers, loginSerializer, loginResponseSeria
 from django.contrib.auth.hashers import check_password
 from .exceptions import userDoesNotExist,wrongPassword
 import jwt
+from django.contrib.auth import login
+import json
 
 class UserService:
 
     @classmethod
-    def loginUser(cls, **credentials):
-        print("inside login user service")
-        # print(get_user_model().check_password( raw_password= credentials['password']))
+    def loginUser(cls,request, **credentials):
         try:
             user = get_user_model().objects.get(refId=credentials['refId'])
             if(check_password(credentials['password'], UserSerializers(user).data['password'])):
-                print(loginSerializer(user).data)
+                print(json.dumps(dir(request)))
+                login(request, user)
+                print(json.dumps(dir(request)))
                 return UserService.tokenGeneration(**loginResponseSerializer(user).data)
                 # return loginResponseSerializer(user).data
             else:
@@ -24,6 +26,4 @@ class UserService:
 
     @classmethod
     def tokenGeneration(cls, **userInfo):
-        print("inside token generation")
-        print(userInfo)
         return jwt.encode({"userInfo": userInfo }, "secret1ForThisProject", algorithm="HS256")

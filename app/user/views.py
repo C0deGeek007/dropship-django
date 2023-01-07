@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.mixins import AccessMixin
 from graphene_django.views import GraphQLView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 
 
 @api_view(['POST'])
@@ -24,21 +25,22 @@ def register(request):
 def login(request):
     serializer = loginSerializer(data=request.data)
     if(serializer.is_valid(raise_exception=True)):
-        res = UserService.loginUser(**serializer.data)
+        res = UserService.loginUser(request,**serializer.data)
         return Response({"token":res,"status": 201}, status=201)
         # print(serializer.validated_data)
     return Response("inside login view")
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def users(request):
     # ExampleAuthentication().authenticate(request)
     print("inside users view")
     print(UserSerializers(request.user).data)
+    print(get_user_model()._meta.pk.to_python(request.session["_auth_user_id"]))
     return Response("inside get all user")
 
-# class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
-#     pass
-
-class PrivateGraphQLView(GraphQLView):
+class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
     pass
+
+# class PrivateGraphQLView(GraphQLView):
+#     pass

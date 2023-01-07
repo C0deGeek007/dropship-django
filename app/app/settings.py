@@ -50,13 +50,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'app.custom_exception_handler.custom_exception_handler',
-'DEFAULT_AUTHENTICATION_CLASSES': [
-    'user.authBackend.ExampleAuthentication'
-    ]
-}
-
 AUTHENTICATION_BACKENDS = [
     'user.authBackend.ExampleAuthentication'
 ]
