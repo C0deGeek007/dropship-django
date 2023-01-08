@@ -39,6 +39,16 @@ def users(request):
     print(get_user_model()._meta.pk.to_python(request.session["_auth_user_id"]))
     return Response("inside get all user")
 
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def logout(request):
+    # ExampleAuthentication().authenticate(request)
+    try:
+        UserService.logoutUser(request)
+        return Response({"data": "user logged out","ok":True})
+    except:
+        return Response({"data": "something went wrong","ok":False})
+
 class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
     pass
 

@@ -3,7 +3,7 @@ from .userSerializer import UserSerializers, loginSerializer, loginResponseSeria
 from django.contrib.auth.hashers import check_password
 from .exceptions import userDoesNotExist,wrongPassword
 import jwt
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 import json
 
 class UserService:
@@ -27,3 +27,7 @@ class UserService:
     @classmethod
     def tokenGeneration(cls, **userInfo):
         return jwt.encode({"userInfo": userInfo }, "secret1ForThisProject", algorithm="HS256")
+    
+    @classmethod
+    def logoutUser(cls, request):
+        return logout(request)

@@ -10,6 +10,7 @@ urlpatterns = [
     # path('', views.index, name='index'),
     path('register', views.register, name="add-user"),
     path('login', views.login, name="login-user"),
+    path('logout', views.logout, name="logout-user"),
     path('users', views.users, name="get-all-user"),
     path("users-graphql", csrf_exempt(views.PrivateGraphQLView.as_view(graphiql=True, schema = schema ))),
 ]
